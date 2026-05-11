@@ -233,6 +233,11 @@ function showPage(targetId) {
         }
     });
 
+    // Handle Kakao Map Relayout when About page is shown
+    if (targetId === '#about' && typeof initMap === 'function') {
+        setTimeout(initMap, 100); // Give a small delay for display:block to settle
+    }
+
     // Refresh ScrollTrigger and Lucide
     ScrollTrigger.refresh();
 }
