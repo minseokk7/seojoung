@@ -92,7 +92,7 @@ class InventoryManager {
             <div class="machine-card" onclick="window.inventoryManager.showDetail('${m.id}')">
                 <div class="img-container">
                     <span class="status-tag status-${m.status}">${this.getStatusText(m.status)}</span>
-                    <img src="${m.image}" alt="${m.name}" onerror="this.src='https://placehold.co/600x400/f8f9fa/111827?text=Machine+Image'">
+                    <img src="${m.image}" alt="${m.name}" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/600x400/f8f9fa/111827?text=Machine+Image'">
                 </div>
                 <div class="card-content">
                     <div class="maker">${m.maker}</div>
@@ -121,9 +121,17 @@ class InventoryManager {
                 <div>
                     <img src="${machine.image}" class="detail-img" alt="${machine.name}">
                     <div class="quick-inquiry">
+                        <p class="notice-text-sm" style="color: var(--primary); font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="info" style="width:16px;"></i> 방문 전 연락 바랍니다
+                        </p>
                         <h4>기계 문의 요청</h4>
                         <p>해당 기종에 대해 궁금하신 점을 상담해드립니다.</p>
-                        <button class="btn-primary w-full" style="margin-top:20px" onclick="window.showPage('#contact'); document.querySelector('.modal').classList.remove('active')">지금 바로 문의하기</button>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                            <a href="tel:010-3846-0536" class="btn-primary w-full" style="text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <i data-lucide="phone"></i> 전화 상담 연결
+                            </a>
+                            <button class="btn-secondary w-full" onclick="window.showPage('#contact'); document.querySelector('.modal').classList.remove('active')">온라인 문의 남기기</button>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -136,11 +144,14 @@ class InventoryManager {
                         <tr><th>모델명</th><td>${machine.model}</td></tr>
                         <tr><th>제조년도</th><td>${machine.year}</td></tr>
                         <tr><th>상태</th><td>${this.getStatusText(machine.status)}</td></tr>
+                        <tr><th>기계 위치</th><td>${machine.address || '경기도 시흥시 오이도로 21'}</td></tr>
                         ${(machine.specs || []).map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('')}
                     </table>
                 </div>
             </div>
         `;
+        // Re-initialize Lucide icons for the newly injected HTML
+        if (window.lucide) window.lucide.createIcons();
         document.getElementById('detail-modal').classList.add('active');
     }
 
@@ -174,6 +185,15 @@ class InventoryManager {
         localStorage.setItem('machines', JSON.stringify(this.machines));
         this.render();
         document.querySelector('.modal').classList.remove('active');
+    }
+
+    openPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+                document.getElementById('machine-address').value = addr;
+            }
+        }).open();
     }
 }
 

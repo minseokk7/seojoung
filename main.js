@@ -3,9 +3,10 @@ lucide.createIcons();
 
 // Initialize Smooth Scroll (Lenis)
 const lenis = new Lenis({
-    duration: 1.2,
+    duration: 0.8,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true
+    smoothWheel: true,
+    touchMultiplier: 1.5
 });
 
 function raf(time) {
@@ -135,6 +136,7 @@ if (machineForm) {
             category: formData.get('category'),
             specs: formData.get('specs'),
             image: formData.get('image') || "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800",
+            address: formData.get('address'),
             status: 'onsale'
         };
 
