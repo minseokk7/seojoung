@@ -403,6 +403,8 @@
             };
 
             const map = new kakao.maps.Map(container, options);
+            window.kakaoMap = map;
+            window.kakaoMapCenter = targetCoords;
 
             const marker = new kakao.maps.Marker({
                 map: map,

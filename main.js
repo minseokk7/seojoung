@@ -274,6 +274,14 @@ function showPage(targetId) {
         if (el) {
             el.style.display = 'block';
             gsap.to(el, { opacity: 1, duration: 0.5 });
+            
+            // Fix for Kakao Map relayout if about section is shown
+            if (id === '#about' && window.kakaoMap) {
+                setTimeout(() => {
+                    window.kakaoMap.relayout();
+                    window.kakaoMap.setCenter(window.kakaoMapCenter);
+                }, 500);
+            }
         }
     });
 
