@@ -1,17 +1,18 @@
-// Firebase Configuration - Replace with your own project keys from Firebase Console
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyD_pnUsyKu8-a4EyjmUshhWayX2PLb0g5U",
+  authDomain: "seojoung.firebaseapp.com",
+  databaseURL: "https://seojoung-default-rtdb.firebaseio.com",
+  projectId: "seojoung",
+  storageBucket: "seojoung.firebasestorage.app",
+  messagingSenderId: "166988130755",
+  appId: "1:166988130755:web:002ee78a11979a17b37576",
+  measurementId: "G-FPCFRPED59"
 };
 
 // Initialize Firebase
 let db = null;
 try {
-    if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+    if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
         firebase.initializeApp(firebaseConfig);
         db = firebase.firestore();
         console.log("Firebase Connected Successfully");
