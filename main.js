@@ -135,6 +135,14 @@ if (machineForm) {
             year: formData.get('year'),
             category: formData.get('category'),
             specs: formData.get('specs'),
+            name_en: formData.get('name_en') || formData.get('name'),
+            maker_en: formData.get('maker_en') || formData.get('maker'),
+            model_en: formData.get('model_en') || formData.get('model'),
+            specs_en: formData.get('specs_en') || formData.get('specs'),
+            name_cn: formData.get('name_cn') || formData.get('name'),
+            maker_cn: formData.get('maker_cn') || formData.get('maker'),
+            model_cn: formData.get('model_cn') || formData.get('model'),
+            specs_cn: formData.get('specs_cn') || formData.get('specs'),
             image: formData.get('image') || "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800",
             address: formData.get('address'),
             status: 'onsale'
@@ -147,6 +155,53 @@ if (machineForm) {
             showPage('#hero');
         }
     };
+
+    // Auto Translate Free Logic
+    const autoTranslateBtn = document.getElementById('auto-translate-btn');
+    if (autoTranslateBtn) {
+        async function translateText(text, targetLang) {
+            if (!text) return '';
+            try {
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`);
+                const data = await res.json();
+                return data[0].map(x => x[0]).join('');
+            } catch (e) {
+                console.error('Translation failed', e);
+                return text;
+            }
+        }
+
+        autoTranslateBtn.onclick = async () => {
+            const nameKo = machineForm.querySelector('input[name="name"]').value;
+            const makerKo = machineForm.querySelector('input[name="maker"]').value;
+            const modelKo = machineForm.querySelector('input[name="model"]').value;
+            const specsKo = machineForm.querySelector('textarea[name="specs"]').value;
+
+            autoTranslateBtn.innerText = "⏳ 번역 중...";
+            autoTranslateBtn.disabled = true;
+
+            try {
+                // English
+                if (nameKo) machineForm.querySelector('input[name="name_en"]').value = await translateText(nameKo, 'en');
+                if (makerKo) machineForm.querySelector('input[name="maker_en"]').value = await translateText(makerKo, 'en');
+                if (modelKo) machineForm.querySelector('input[name="model_en"]').value = await translateText(modelKo, 'en');
+                if (specsKo) machineForm.querySelector('textarea[name="specs_en"]').value = await translateText(specsKo, 'en');
+
+                // Chinese (Simplified)
+                if (nameKo) machineForm.querySelector('input[name="name_cn"]').value = await translateText(nameKo, 'zh-CN');
+                if (makerKo) machineForm.querySelector('input[name="maker_cn"]').value = await translateText(makerKo, 'zh-CN');
+                if (modelKo) machineForm.querySelector('input[name="model_cn"]').value = await translateText(modelKo, 'zh-CN');
+                if (specsKo) machineForm.querySelector('textarea[name="specs_cn"]').value = await translateText(specsKo, 'zh-CN');
+                
+                alert("자동 번역이 완료되었습니다. 내용을 확인하고 수정할 수 있습니다.");
+            } catch (e) {
+                alert("번역 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+            } finally {
+                autoTranslateBtn.innerText = "🌐 자동 번역하기 (무료 API)";
+                autoTranslateBtn.disabled = false;
+            }
+        };
+    }
 }
 
 // Post Add
@@ -262,4 +317,36 @@ document.addEventListener('click', (e) => {
 // Handle External calls or direct button clicks that set hash
 window.addEventListener('hashchange', () => {
     showPage(window.location.hash);
+});
+
+// Global Language State
+window.currentLang = localStorage.getItem('site_lang') || 'ko';
+
+const langBtns = document.querySelectorAll('.lang-btn');
+
+// Initialize Active Button and Translations
+langBtns.forEach(b => {
+    b.classList.remove('active');
+    if(b.getAttribute('data-lang') === window.currentLang) {
+        b.classList.add('active');
+    }
+});
+if (window.applyI18n) window.applyI18n(window.currentLang);
+
+langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        langBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const selectedLang = btn.getAttribute('data-lang');
+        window.currentLang = selectedLang;
+        localStorage.setItem('site_lang', selectedLang);
+        
+        // Apply translations to static text
+        if (window.applyI18n) window.applyI18n(selectedLang);
+        
+        // Re-render inventory to show translated data
+        if (window.inventoryManager && window.inventoryManager.render) {
+            window.inventoryManager.render();
+        }
+    });
 });

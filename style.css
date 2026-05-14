@@ -202,8 +202,8 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.8;
-    filter: grayscale(30%) brightness(1.05);
+    opacity: 0.95;
+    filter: brightness(0.85);
 }
 
 .video-background .overlay {
@@ -212,7 +212,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
     z-index: 1;
 }
 
@@ -230,6 +230,8 @@ ul {
     letter-spacing: -2px;
     line-height: 1.2;
     margin-bottom: 24px;
+    color: #FFFFFF;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
     will-change: transform, opacity;
 }
 
@@ -239,9 +241,10 @@ ul {
 
 .hero-content p {
     font-size: clamp(18px, 2vw, 22px);
-    color: var(--text-main);
+    color: #FFFFFF;
     margin-bottom: 40px;
-    font-weight: 500;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     will-change: transform, opacity;
 }
 
@@ -643,6 +646,22 @@ footer {
     grid-template-columns: 2fr 1fr;
     gap: 40px;
     margin-bottom: 60px;
+}
+
+.footer-links h4 {
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+.footer-links ul {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links li {
+    color: var(--text-dim);
+    font-size: 15px;
 }
 
 .footer-bottom {
