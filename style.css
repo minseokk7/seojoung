@@ -790,26 +790,49 @@ footer {
         gap: 40px;
     }
     
-    /* Navbar */
+    /* Navbar Mobile Layout: Logo left, Actions right, Links below */
     #navbar {
         height: auto;
-        padding: 15px 0;
+        padding: 10px 0;
     }
     .nav-container {
-        flex-direction: column;
-        gap: 15px;
-        height: auto;
-    }
-    .nav-links {
-        margin: 0;
-        gap: 15px;
-        width: 100%;
-        justify-content: center;
+        flex-direction: row;
         flex-wrap: wrap;
+        gap: 15px;
+        padding: 0 20px;
+        justify-content: space-between;
+    }
+    .logo {
+        flex: 1;
+        font-size: 20px;
+    }
+    .logo img {
+        height: 30px;
     }
     .nav-actions {
+        width: auto;
+        justify-content: flex-end;
+    }
+    .nav-links {
         width: 100%;
-        justify-content: center;
+        order: 3;
+        margin: 0;
+        gap: 20px;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+    .lang-switcher {
+        margin-right: 8px !important;
+    }
+    #admin-btn {
+        padding: 6px 10px;
+        font-size: 12px;
     }
     
     /* Hero */
