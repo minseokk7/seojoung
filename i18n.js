@@ -35,7 +35,7 @@ const i18nData = {
     // About
     about_title_1: { ko: "최고의 기술력과 신뢰", en: "Top Technology and Trust", cn: "顶尖技术与信任" },
     about_title_2: { ko: "서종기계", en: "Seojong Machinery", cn: "瑞钟机械" },
-    about_title_3: { ko: "가 함께합니다", en: "is with you", cn: "与您同在" },
+    about_title_3: { ko: "가 함께합니다", en: " is with you", cn: " 与您同在" },
     about_desc: { ko: "서종기계는 지난 20년간 대한민국 산업 현장의 심장부에서 정밀 기계 무역의 표준을 제시해왔습니다. 우리는 단순한 중고 매매를 넘어, 모든 장비에 대한 철저한 점검과 검수를 통해 고객의 생산성을 보장합니다.", en: "For the past 20 years, Seojong Machinery has set the standard for precision machinery trade in Korea. We guarantee customer productivity through thorough inspection of all equipment.", cn: "在过去的20年里，瑞钟机械在韩国工业现场的心脏地带制定了精密机械贸易的标准。我们通过对所有设备的彻底检查确保客户的生产力。" },
     about_notice: { ko: "방문 전 연락 바랍니다", en: "Please contact us before visiting", cn: "来访前请提前联系" },
     stat_1: { ko: "매매 완료", en: "Sales Completed", cn: "交易完成" },

@@ -784,9 +784,123 @@ footer {
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 968px) {
-    .about-grid, .contact-card {
+    /* Layouts */
+    .about-grid, .contact-card, .footer-grid, .detail-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+    
+    /* Navbar */
+    #navbar {
+        height: auto;
+        padding: 15px 0;
+    }
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        height: auto;
+    }
+    .nav-links {
+        margin: 0;
+        gap: 15px;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .nav-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Hero */
+    #hero {
+        padding-top: 140px;
+    }
+    
+    /* Modals */
+    .modal-content {
+        padding: 30px;
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Global Container */
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Typography */
+    .section-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+    .hero-content h1 {
+        font-size: 40px;
+    }
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    /* Sections */
+    .section {
+        padding: 60px 0;
+    }
+    
+    /* Buttons */
+    .hero-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero-btns a {
+        width: 100%;
+    }
+
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    /* Filters & Search */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .filter-bar {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 5px;
+    }
+    .search-box {
+        max-width: 100%;
+    }
+
+    /* Contact Card */
+    .contact-card {
+        padding: 30px 20px;
+    }
+
+    /* CTA */
+    .cta-card {
+        padding: 40px 20px;
+    }
+    .cta-card h3 {
+        font-size: 24px;
+    }
+
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Specs Table */
+    .specs-table th, .specs-table td {
+        padding: 10px;
+        font-size: 14px;
     }
 }
 
@@ -802,7 +916,7 @@ footer {
 .notice-text {
     font-weight: 700;
     color: var(--primary);
-    margin-bottom: 16px;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     gap: 8px;

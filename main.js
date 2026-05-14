@@ -277,8 +277,18 @@ function showPage(targetId) {
         }
     });
 
-    // Scroll to top
-    lenis.scrollTo(0, { immediate: true });
+    // Scroll to target
+    if (targetId === '#hero') {
+        lenis.scrollTo(0, { immediate: true });
+    } else {
+        // Give the DOM a tiny bit of time to render the block display before calculating scroll position
+        setTimeout(() => {
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                lenis.scrollTo(targetEl, { offset: -80, duration: 1.2 });
+            }
+        }, 50);
+    }
 
     // Update Nav Active State
     navLinks.forEach(link => {
